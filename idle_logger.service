@@ -1,0 +1,12 @@
+[Unit]
+Description=Lab PC idle-time logger (timestamps only)
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/local/sbin/idle_logger.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
