@@ -14,7 +14,7 @@ jobs/ (example job scripts), docs/ (report and slides).
 
 ## Setup and run
 1. Install Ubuntu packages: `sudo apt install python3-evdev python3-psutil` (version to be confirmed)
-2. ... (add step by step as you build them)
+2. 
 
 ## Results
 (Link to results/ when available.)
