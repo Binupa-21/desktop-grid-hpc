@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y \
     gfortran \
     openmpi-bin \
     libopenmpi-dev \
+    hpl-openmpi \
+
     python3 \
     python3-pip \
     wget \
