@@ -1,0 +1,39 @@
+---
+- name: Configure Lab PC as Desktop Grid Worker Node
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install system dependencies for idle logging and Docker
+      apt:
+        name:
+          - python3-evdev
+          - python3-psutil
+          - nfs-common
+          - docker.io
+        state: present
+        update_cache: yes
+
+    - name: Ensure desktop-grid binary folder exists
+      file:
+        path: /usr/local/bin/desktop-grid
+        state: directory
+        mode: '0755'
+
+    - name: Copy idle_logger.py
+      copy:
+        src: ../tools/idle-logger/idle_logger.py
+        dest: /usr/local/bin/desktop-grid/idle_logger.py
+        mode: '0755'
+
+    - name: Deploy systemd service unit
+      copy:
+        src: ../tools/idle-logger/idle_logger.service
+        dest: /etc/systemd/system/idle-logger.service
+        mode: '0644'
+
+    - name: Enable and restart idle-logger service
+      systemd:
+        name: idle-logger
+        daemon_reload: yes
+        enabled: yes
+        state: restarted
